@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# WhatsApp credentials and session keys (NEVER commit these)
+auth_info_baileys/
+ramzy-auth/
+.auth/
+*.session
+creds.json
+app-state-sync-*.json
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+
+# Logs and temporary files
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+*.log
+.DS_Store
