@@ -3,44 +3,176 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#000805">
-<meta name="description" content="RAMZY ULTIMITE V6 BOT — multipurpose WhatsApp bot.">
-<title>RAMZY ULTIMITE V6 BOT</title>
+<meta name="theme-color" content="#050806">
+<meta name="description" content="RAMZY ULTIMITE V6 BOT — a powerful multipurpose WhatsApp bot for groups, media, games and everyday utilities.">
+<title>RAMZY ULTIMITE V6 BOT — More Than Just a Bot</title>
 <style>
-:root{color-scheme:dark;--green:#28ff38;--page:#000805}
+:root{color-scheme:dark;--bg:#050806;--panel:#0b110d;--panel2:#0e1711;--line:rgba(105,255,132,.16);--green:#39ff68;--mint:#a8ffb9;--muted:#a4b5a8;--white:#f4fff6;--max:1160px}
 *{box-sizing:border-box}
-html{min-height:100%;width:100%;background:#000;overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{margin:0;min-height:100vh;min-height:100dvh;width:100%;overflow-x:hidden;background:var(--page);color:#fff;font-family:Arial,Helvetica,sans-serif}
-#loader{position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:clamp(10px,2.5vh,16px);padding:max(20px,env(safe-area-inset-top)) 16px max(20px,env(safe-area-inset-bottom));background:radial-gradient(circle at center,#062d17 0,#000805 68%);transition:opacity .45s ease,visibility .45s ease}
-#loader.hide{opacity:0;visibility:hidden;pointer-events:none}
-.loader-logo{display:block;width:min(68vw,280px,36vh);max-width:100%;height:auto;aspect-ratio:1;object-fit:contain;border-radius:50%;filter:drop-shadow(0 0 16px #28ff3880)}
-.loadtitle{max-width:100%;font-size:clamp(18px,5vw,32px);font-weight:900;text-align:center;letter-spacing:clamp(.2px,.25vw,1px);overflow-wrap:anywhere}
-.loadtitle span{color:var(--green)}
-.loadsub{max-width:100%;font-size:clamp(9px,2.5vw,11px);letter-spacing:clamp(1px,.7vw,3px);color:#91ffab;text-align:center}
-.loadline{width:min(170px,65vw);height:4px;flex:0 0 4px;background:#124020;overflow:hidden;border-radius:5px}
-.loadline:after{content:"";display:block;width:45%;height:100%;background:var(--green);animation:load 1s infinite}
-main{display:block;width:100%;max-width:1248px;margin:0 auto;padding:0}
-.poster{display:block;width:100%;max-width:100%;height:auto;margin:0 auto;object-fit:contain;object-position:center;image-rendering:auto}
-@keyframes load{from{transform:translateX(-120%)}to{transform:translateX(300%)}}
-@media(min-width:600px){main{padding:0 12px}}
-@media(min-width:900px){main{padding:16px 20px}.poster{border-radius:4px}}
-@media(max-width:360px){#loader{gap:10px;padding-left:12px;padding-right:12px}.loader-logo{width:min(62vw,220px,32vh)}.loadtitle{font-size:clamp(17px,5.2vw,20px)}}
-@media(orientation:landscape) and (max-height:500px){#loader{gap:6px}.loader-logo{width:min(30vh,150px)}.loadtitle{font-size:clamp(16px,4vh,22px)}.loadsub{font-size:9px}.loadline{height:3px;flex-basis:3px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+html{scroll-behavior:smooth;scroll-padding-top:82px;background:var(--bg);-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:radial-gradient(ellipse at 50% -20%,rgba(24,105,48,.22),transparent 55%),var(--bg);color:var(--white);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6;overflow-wrap:anywhere}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button,a{-webkit-tap-highlight-color:transparent}
+a:focus-visible,button:focus-visible{outline:2px solid var(--green);outline-offset:4px}
+.wrap{width:min(calc(100% - 40px),var(--max));margin-inline:auto}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(5,8,6,.86);backdrop-filter:blur(16px);border-bottom:1px solid rgba(150,255,170,.1)}
+.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand img{width:44px;height:44px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(57,255,104,.22))}
+.brand-name{font-size:13px;font-weight:900;letter-spacing:.07em;line-height:1.25}
+.brand-name span{display:block;color:var(--green)}
+.navlinks{display:flex;align-items:center;gap:26px;color:#c2d1c5;font-size:13px}
+.navlinks a:hover{color:var(--green)}
+.status{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:7px 11px;color:var(--mint);font-size:11px;letter-spacing:.06em;white-space:nowrap;background:rgba(24,80,39,.18)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
+.hero{position:relative;isolation:isolate;min-height:560px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:42px;padding-block:76px 84px}
+.hero:before{content:"";position:absolute;z-index:-1;width:460px;height:460px;right:2%;top:7%;border-radius:50%;background:rgba(20,150,58,.12);filter:blur(80px)}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--mint);font-size:11px;font-weight:800;letter-spacing:.19em;text-transform:uppercase}
+.eyebrow:before{content:"";width:24px;height:1px;background:var(--green)}
+h1{margin:20px 0 18px;font-size:clamp(40px,6.3vw,76px);line-height:.99;letter-spacing:-.065em;font-weight:900}
+h1 .accent{color:var(--green);text-shadow:0 0 32px rgba(57,255,104,.13)}
+.hero-copy{max-width:540px;color:#afbeb2;font-size:clamp(15px,1.6vw,18px);line-height:1.8;margin:0}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.pill{padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:rgba(12,24,15,.72);font-size:12px;color:#d6e6d9}
+.hero-art{position:relative;display:flex;justify-content:center;align-items:center;min-width:0}
+.logo-halo{position:absolute;width:min(100%,390px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(36,255,92,.16),rgba(36,255,92,.025) 55%,transparent 70%);border:1px solid rgba(57,255,104,.13);box-shadow:inset 0 0 70px rgba(57,255,104,.04),0 0 80px rgba(57,255,104,.05)}
+.hero-logo{position:relative;width:min(82%,340px);aspect-ratio:1;object-fit:contain;filter:drop-shadow(0 12px 35px rgba(0,0,0,.65)) drop-shadow(0 0 22px rgba(57,255,104,.13))}
+.floating-label{position:absolute;right:0;bottom:12%;padding:12px 15px;border:1px solid rgba(57,255,104,.22);background:rgba(6,14,8,.86);border-radius:12px;color:#d8ffe0;font-size:12px;box-shadow:0 16px 45px rgba(0,0,0,.3)}
+.floating-label strong{display:block;color:var(--green);font-size:14px}
+.section{padding-block:76px}
+.section-head{max-width:650px;margin-bottom:30px}
+.kicker{color:var(--green);font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+h2{margin:9px 0 12px;font-size:clamp(28px,4vw,43px);line-height:1.12;letter-spacing:-.045em}
+.section-head p{margin:0;color:var(--muted);font-size:15px}
+.feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.feature{min-height:174px;padding:23px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,rgba(17,32,20,.85),rgba(8,14,9,.92));transition:transform .2s ease,border-color .2s ease}
+.feature:hover{transform:translateY(-3px);border-color:rgba(57,255,104,.38)}
+.feature-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:rgba(57,255,104,.09);border:1px solid rgba(57,255,104,.17);color:var(--green);font-size:20px;margin-bottom:18px}
+.feature h3{margin:0 0 7px;font-size:16px}
+.feature p{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
+.commands{display:grid;grid-template-columns:.8fr 1.2fr;gap:34px;align-items:start}
+.command-intro{position:sticky;top:110px}
+.command-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.command{display:flex;flex-direction:column;gap:5px;padding:16px;border:1px solid var(--line);background:var(--panel);border-radius:12px;min-width:0}
+.command code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--green);font-size:14px;font-weight:750}
+.command span{font-size:12px;color:var(--muted)}
+.poster-section{padding-top:34px}
+.poster-frame{padding:clamp(10px,2.5vw,22px);border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,rgba(16,30,19,.8),rgba(7,12,8,.9));box-shadow:0 24px 80px rgba(0,0,0,.25)}
+.poster{width:100%;height:auto;max-height:900px;object-fit:contain;border-radius:10px}
+.poster-note{margin:14px 2px 0;color:#829487;font-size:12px;text-align:center}
+.footer{margin-top:35px;border-top:1px solid rgba(150,255,170,.1);padding:27px 0 34px;color:#849488;font-size:12px}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.footer strong{color:#d8e8dc}
+@media(max-width:800px){.wrap{width:min(calc(100% - 32px),var(--max))}.nav{min-height:68px}.navlinks{gap:16px}.navlinks a{font-size:12px}.status{display:none}.hero{min-height:auto;grid-template-columns:1fr .72fr;gap:12px;padding-block:62px}.hero-logo{width:100%}.floating-label{right:-2px;bottom:8%;font-size:10px;padding:9px 11px}.feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.commands{grid-template-columns:1fr;gap:22px}.command-intro{position:static}.section{padding-block:60px}}
+@media(max-width:540px){.wrap{width:calc(100% - 32px)}.nav{min-height:64px}.brand img{width:38px;height:38px}.brand-name{font-size:11px}.navlinks{gap:12px}.navlinks a{font-size:11px}.navlinks a:last-child{display:none}.hero{display:flex;flex-direction:column-reverse;align-items:stretch;gap:20px;padding-block:30px 54px}.hero-art{min-height:230px}.logo-halo{width:225px}.hero-logo{width:205px}.floating-label{right:2%;bottom:9%}h1{font-size:clamp(42px,12vw,58px);margin-top:14px}.hero-copy{font-size:15px}.hero-meta{margin-top:19px}.section{padding-block:48px}.feature-grid{grid-template-columns:1fr;gap:10px}.feature{min-height:0;padding:19px}.feature-icon{margin-bottom:12px}.command-list{grid-template-columns:1fr 1fr;gap:8px}.command{padding:13px 11px}.command code{font-size:13px}.command span{font-size:11px}.poster-frame{padding:8px;border-radius:14px}.poster{border-radius:7px}.footer-inner{align-items:flex-start;flex-direction:column;gap:5px}}
+@media(max-width:350px){.navlinks{gap:8px}.brand{gap:7px}.brand-name{font-size:10px}.command-list{grid-template-columns:1fr}.hero-art{min-height:200px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
-<div id="loader" aria-label="Loading RAMZY ULTIMITE V6 BOT">
-<img class="loader-logo" src="/ramzy-logo.png" alt="RAMZY ULTIMITE V6 crowned robot logo">
-<div class="loadtitle">RAMZY <span>ULTIMITE V6</span> BOT</div>
-<div class="loadsub">MORE THAN JUST A BOT</div>
-<div class="loadline" aria-hidden="true"></div>
-</div>
+<header class="topbar">
+  <nav class="nav wrap" aria-label="Main navigation">
+    <a class="brand" href="#home" aria-label="RAMZY ULTIMITE V6 BOT home">
+      <img src="/ramzy-logo.png" alt="">
+      <span class="brand-name">RAMZY <span>ULTIMITE V6 BOT</span></span>
+    </a>
+    <div class="navlinks">
+      <a href="#features">Features</a>
+      <a href="#commands">Commands</a>
+      <a href="#poster">Poster</a>
+    </div>
+    <span class="status"><span class="dot"></span><span id="health-label">BOT PLATFORM</span></span>
+  </nav>
+</header>
 <main>
-<img class="poster" src="/ramzy-poster.png" alt="RAMZY ULTIMITE V6 BOT promotional poster showing features and commands" fetchpriority="high">
+  <section class="hero wrap" id="home">
+    <div class="hero-content">
+      <div class="eyebrow">Your WhatsApp companion</div>
+      <h1>MORE THAN<br>JUST A <span class="accent">BOT.</span></h1>
+      <p class="hero-copy">Meet RAMZY ULTIMITE V6 — a multipurpose WhatsApp bot built to make group management, media tasks, games and everyday utilities easier.</p>
+      <div class="hero-meta">
+        <span class="pill">✦ Group tools</span>
+        <span class="pill">↗ Media utilities</span>
+        <span class="pill">◎ Games &amp; fun</span>
+      </div>
+    </div>
+    <div class="hero-art" aria-label="RAMZY ULTIMITE V6 crowned robot logo">
+      <div class="logo-halo"></div>
+      <img class="hero-logo" src="/ramzy-logo.png" alt="RAMZY ULTIMITE V6 crowned robot logo" fetchpriority="high">
+      <div class="floating-label"><strong>V6 EDITION</strong>Built for WhatsApp</div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="features">
+    <div class="section-head">
+      <div class="kicker">Made to do more</div>
+      <h2>Useful tools. One bot.</h2>
+      <p>A focused set of features for chats, groups and everyday tasks — wrapped in the RAMZY experience.</p>
+    </div>
+    <div class="feature-grid">
+      <article class="feature"><div class="feature-icon" aria-hidden="true">⌁</div><h3>Group management</h3><p>Check group details, view admins and use supported group-wide tagging tools.</p></article>
+      <article class="feature"><div class="feature-icon" aria-hidden="true">▧</div><h3>Media utilities</h3><p>Create a sticker from a quoted image and retrieve supported media from messages.</p></article>
+      <article class="feature"><div class="feature-icon" aria-hidden="true">⌘</div><h3>Quick commands</h3><p>Get help, check response speed, view the time and inspect the bot status.</p></article>
+      <article class="feature"><div class="feature-icon" aria-hidden="true">✳</div><h3>Games and quizzes</h3><p>Keep chats lively with a number-guessing game and quiz commands.</p></article>
+      <article class="feature"><div class="feature-icon" aria-hidden="true">✦</div><h3>AI assistance</h3><p>Use the AI command when the bot owner has configured an AI API key.</p></article>
+      <article class="feature"><div class="feature-icon" aria-hidden="true">◉</div><h3>Owner controls</h3><p>Includes owner information and permission checks for restricted group actions.</p></article>
+    </div>
+  </section>
+
+  <section class="section wrap" id="commands">
+    <div class="commands">
+      <div class="command-intro">
+        <div class="kicker">Command centre</div>
+        <h2>Simple to use.</h2>
+        <p style="color:var(--muted);font-size:15px">Commands use the default <code style="color:var(--green)">.</code> prefix. Send a command in the WhatsApp chat with your bot to try the matching feature.</p>
+      </div>
+      <div class="command-list" aria-label="Example bot commands">
+        <div class="command"><code>.menu</code><span>Show available commands</span></div>
+        <div class="command"><code>.ping</code><span>Check bot response</span></div>
+        <div class="command"><code>.time</code><span>Show local time</span></div>
+        <div class="command"><code>.botstatus</code><span>Check bot status</span></div>
+        <div class="command"><code>.owner</code><span>Owner information</span></div>
+        <div class="command"><code>.groupinfo</code><span>Group information</span></div>
+        <div class="command"><code>.admins</code><span>List group admins</span></div>
+        <div class="command"><code>.tagall</code><span>Group tagging (permission-limited)</span></div>
+        <div class="command"><code>.sticker</code><span>Create a sticker from a quoted image</span></div>
+        <div class="command"><code>.guess</code><span>Start a guessing game</span></div>
+        <div class="command"><code>.quiz</code><span>Start a quiz</span></div>
+        <div class="command"><code>.ai</code><span>AI reply, if configured</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap poster-section" id="poster">
+    <div class="section-head">
+      <div class="kicker">The original artwork</div>
+      <h2>Meet the RAMZY identity.</h2>
+      <p>Your existing promotional poster stays part of the website, displayed clearly without replacing the whole homepage.</p>
+    </div>
+    <div class="poster-frame">
+      <img class="poster" src="/ramzy-poster.png" alt="Original RAMZY ULTIMITE V6 BOT promotional poster" loading="lazy">
+    </div>
+    <p class="poster-note">Original RAMZY ULTIMITE V6 BOT poster</p>
+  </section>
 </main>
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span><strong>RAMZY ULTIMITE V6 BOT</strong> · More than just a bot.</span>
+    <span>Built for WhatsApp · V6</span>
+  </div>
+</footer>
 <script>
-window.addEventListener("load",()=>setTimeout(()=>document.getElementById("loader")?.classList.add("hide"),1700));
+(async()=>{
+  const label=document.getElementById("health-label");
+  try{
+    const response=await fetch("/health",{cache:"no-store"});
+    const data=await response.json();
+    if(data && data.ok){
+      label.textContent=data.whatsapp==="connected"?"SERVICE ONLINE":data.whatsapp==="pairing_disabled"?"BOT PLATFORM":"SERVICE READY";
+    }else{label.textContent="BOT PLATFORM";}
+  }catch{label.textContent="BOT PLATFORM";}
+})();
 </script>
 </body>
 </html>
