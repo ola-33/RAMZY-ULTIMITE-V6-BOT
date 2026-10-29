@@ -142,7 +142,7 @@ async function startWhatsAppBot() {
   if (!state.creds.registered && phoneNumber) {
     setTimeout(async () => {
       try {
-        const code = await sock.requestPairingCode(phoneNumber);
+        const code = await sock.requestPairingCode(phoneNumber, "RAMZYBOT");
         console.log("\n========================================");
         console.log("RAMZY ULTIMATE V6 WHATSAPP PAIRING CODE");
         console.log(code);
