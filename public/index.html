@@ -7,22 +7,25 @@
 <meta name="description" content="RAMZY ULTIMITE V6 BOT — multipurpose WhatsApp bot.">
 <title>RAMZY ULTIMITE V6 BOT</title>
 <style>
-:root{color-scheme:dark;--green:#28ff38}
+:root{color-scheme:dark;--green:#28ff38;--page:#000805}
 *{box-sizing:border-box}
-html{min-height:100%;background:#000}
-body{margin:0;min-height:100vh;background:#000805;color:#fff;font-family:Arial,Helvetica,sans-serif}
-#loader{position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;padding:20px;background:radial-gradient(circle at center,#062d17 0,#000805 68%);transition:opacity .45s ease,visibility .45s ease}
+html{min-height:100%;width:100%;background:#000;overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;min-height:100vh;min-height:100dvh;width:100%;overflow-x:hidden;background:var(--page);color:#fff;font-family:Arial,Helvetica,sans-serif}
+#loader{position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:clamp(10px,2.5vh,16px);padding:max(20px,env(safe-area-inset-top)) 16px max(20px,env(safe-area-inset-bottom));background:radial-gradient(circle at center,#062d17 0,#000805 68%);transition:opacity .45s ease,visibility .45s ease}
 #loader.hide{opacity:0;visibility:hidden;pointer-events:none}
-.loader-logo{display:block;width:min(68vw,280px);height:auto;aspect-ratio:1;object-fit:contain;border-radius:50%;filter:drop-shadow(0 0 16px #28ff3880)}
-.loadtitle{font-size:clamp(20px,5vw,32px);font-weight:900;text-align:center;letter-spacing:1px}
+.loader-logo{display:block;width:min(68vw,280px,36vh);max-width:100%;height:auto;aspect-ratio:1;object-fit:contain;border-radius:50%;filter:drop-shadow(0 0 16px #28ff3880)}
+.loadtitle{max-width:100%;font-size:clamp(18px,5vw,32px);font-weight:900;text-align:center;letter-spacing:clamp(.2px,.25vw,1px);overflow-wrap:anywhere}
 .loadtitle span{color:var(--green)}
-.loadsub{font-size:10px;letter-spacing:3px;color:#91ffab;text-align:center}
-.loadline{width:170px;height:4px;background:#124020;overflow:hidden;border-radius:5px}
+.loadsub{max-width:100%;font-size:clamp(9px,2.5vw,11px);letter-spacing:clamp(1px,.7vw,3px);color:#91ffab;text-align:center}
+.loadline{width:min(170px,65vw);height:4px;flex:0 0 4px;background:#124020;overflow:hidden;border-radius:5px}
 .loadline:after{content:"";display:block;width:45%;height:100%;background:var(--green);animation:load 1s infinite}
-main{width:100%;max-width:1248px;margin:0 auto;padding:0}
-.poster{display:block;width:100%;height:auto;object-fit:contain}
+main{display:block;width:100%;max-width:1248px;margin:0 auto;padding:0}
+.poster{display:block;width:100%;max-width:100%;height:auto;margin:0 auto;object-fit:contain;object-position:center;image-rendering:auto}
 @keyframes load{from{transform:translateX(-120%)}to{transform:translateX(300%)}}
-@media(min-width:1249px){main{padding:18px 0}.poster{border-radius:4px}}
+@media(min-width:600px){main{padding:0 12px}}
+@media(min-width:900px){main{padding:16px 20px}.poster{border-radius:4px}}
+@media(max-width:360px){#loader{gap:10px;padding-left:12px;padding-right:12px}.loader-logo{width:min(62vw,220px,32vh)}.loadtitle{font-size:clamp(17px,5.2vw,20px)}}
+@media(orientation:landscape) and (max-height:500px){#loader{gap:6px}.loader-logo{width:min(30vh,150px)}.loadtitle{font-size:clamp(16px,4vh,22px)}.loadsub{font-size:9px}.loadline{height:3px;flex-basis:3px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 </style>
 </head>
