@@ -5,6 +5,8 @@ const { startWhatsAppBot } = require("./bot");
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
 const publicDir = path.join(__dirname, "public");
+app.use(express.json({ limit: "2kb" }));
+let lastPairingRequestAt = 0;
 
 // Basic security headers for the public website.
 app.disable("x-powered-by");
@@ -23,6 +25,32 @@ app.use(express.static(publicDir, {
   index: "index.html",
   maxAge: process.env.NODE_ENV === "production" ? "1h" : 0
 }));
+
+app.post("/api/pairing-code", async (req, res) => {
+  res.setHeader("Cache-Control", "no-store");
+  const configuredSecret = process.env.PAIRING_SECRET || "";
+  if (!configuredSecret || String(req.body?.secret || "") !== configuredSecret) {
+    return res.status(401).json({ ok: false, error: "Pairing authorization failed. Set your private PAIRING_SECRET in Render Environment and enter it here." });
+  }
+  const phoneNumber = String(req.body?.phoneNumber || "").replace(/[^0-9]/g, "");
+  if (phoneNumber.length < 8 || phoneNumber.length > 15) {
+    return res.status(400).json({ ok: false, error: "Enter your full phone number with country code, digits only." });
+  }
+  if (Date.now() - lastPairingRequestAt < 30000) {
+    return res.status(429).json({ ok: false, error: "Please wait 30 seconds before requesting another pairing code." });
+  }
+  if (typeof global.ramzyPairingRequest !== "function") {
+    return res.status(503).json({ ok: false, error: "WhatsApp pairing is not ready. Ensure ENABLE_WHATSAPP=true in Render Environment and wait for the service to restart." });
+  }
+  lastPairingRequestAt = Date.now();
+  try {
+    const code = await global.ramzyPairingRequest(phoneNumber);
+    return res.status(200).json({ ok: true, code });
+  } catch (err) {
+    console.error("Pairing-code request failed:", err?.message || err);
+    return res.status(400).json({ ok: false, error: err?.message || "Could not create a pairing code. Check Render Logs." });
+  }
+});
 
 app.get("/health", (_req, res) => {
   res.setHeader("Cache-Control", "no-store");
