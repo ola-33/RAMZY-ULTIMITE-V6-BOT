@@ -16,6 +16,7 @@ const ownerNumber = (process.env.OWNER_NUMBER || phoneNumber).replace(/[^0-9]/g,
 const prefix = process.env.PREFIX || ".";
 const timezone = process.env.TIMEZONE || "Africa/Lagos";
 const games = new Map();
+global.ramzyPairingRequest = null;
 
 global.ramzyWhatsAppStatus = "pairing_disabled";
 
@@ -113,6 +114,11 @@ async function startWhatsAppBot() {
     markOnlineOnConnect: false,
     syncFullHistory: false
   });
+
+  global.ramzyPairingRequest = async (number) => {
+    if (state.creds.registered) throw new Error("This WhatsApp session is already linked. Log out or clear the saved session before pairing a different number.");
+    return sock.requestPairingCode(number, "RAMZYBOT");
+  };
 
   sock.ev.on("creds.update", saveCreds);
 
