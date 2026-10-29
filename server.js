@@ -3,22 +3,48 @@ const path = require("path");
 const { startWhatsAppBot } = require("./bot");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = Number(process.env.PORT) || 3000;
+const publicDir = path.join(__dirname, "public");
 
-app.use(express.static(path.join(__dirname, "public")));
+// Basic security headers for the public website.
+app.disable("x-powered-by");
+app.use((_req, res, next) => {
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("X-Frame-Options", "DENY");
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+  res.setHeader("Content-Security-Policy", "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'");
+  next();
+});
+
+app.use(express.static(publicDir, {
+  dotfiles: "deny",
+  index: "index.html",
+  maxAge: process.env.NODE_ENV === "production" ? "1h" : 0
+}));
 
 app.get("/health", (_req, res) => {
-  res.json({
+  res.setHeader("Cache-Control", "no-store");
+  res.status(200).json({
     ok: true,
-    name: "RAMZY ULTIMATE V6 BOT",
-    whatsapp: global.ramzyWhatsAppStatus || "starting"
+    name: "RAMZY ULTIMITE V6 BOT",
+    whatsapp: global.ramzyWhatsAppStatus || "pairing_disabled"
   });
 });
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`RAMZY ULTIMATE V6 BOT web service listening on port ${PORT}`);
+// Do not expose stack traces or environment details to visitors.
+app.use((err, _req, res, _next) => {
+  console.error("Web request error:", err?.message || "Unknown error");
+  if (res.headersSent) return;
+  res.status(500).json({ ok: false, error: "Internal server error" });
 });
 
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`RAMZY ULTIMITE V6 BOT web service listening on port ${PORT}`);
+});
+
+// WhatsApp remains disabled unless ENABLE_WHATSAPP=true is explicitly set.
 startWhatsAppBot().catch((err) => {
   console.error("WhatsApp bot failed to start:", err?.message || err);
 });
